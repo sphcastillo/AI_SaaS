@@ -4,7 +4,7 @@ const db = require("../models")
 const passport = require("../config/passport");
 require("dotenv").config();
 // Routes starting with '/api/'
-​
+
 router.post('/login', passport.authenticate("local"), (req, res) => {
   let response = {
     username: req.user.username,
@@ -12,12 +12,12 @@ router.post('/login', passport.authenticate("local"), (req, res) => {
   }
   res.json(response);
 })
-​
+
 router.get('/logout', (req, res) => {
   req.logout();
   res.status(200).end();
 })
-​
+
 router.post('/users', (req, res) => {
 	db.User.create(req.body).then((data) => {
 		res.status(200).end();
@@ -32,7 +32,7 @@ router.post('/users', (req, res) => {
 		}
 	})
 })
-​
+
 router.get("/userdata", (req, res) => {
   let user = req.user;
   // console.log(req)
@@ -47,5 +47,5 @@ router.get("/userdata", (req, res) => {
     res.json(null)
   }
 })
-​
+
 module.exports = router;
