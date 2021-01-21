@@ -6,11 +6,13 @@ require("dotenv").config();
 // Routes starting with '/api/'
 
 router.post('/login', passport.authenticate("local"), (req, res) => {
+  console.log("req.body", req.body)
   let response = {
     username: req.user.username,
     id: req.user._id,
   }
   res.json(response);
+  
 })
 
 router.get('/logout', (req, res) => {

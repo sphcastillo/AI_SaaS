@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import AlertBox from './AlertBox';
+import axios from 'axios';
 
 
 export default function Login() {
@@ -22,7 +23,23 @@ export default function Login() {
     // prevent page reload upon form submit:
     event.preventDefault();
 
+    console.log("username", username);
+    console.log("password", password);
 
+    if(username === "" || password === ""){
+        setMessage("both username and password must be given");
+    }else{
+        let user = {
+            username: username,
+            password: password
+        }
+
+    // we want to now check against the database - if the username and password are correct and align
+    // in React, if we want to communicate with API or database we use AXIOS to do it 
+    axios.post('/api/login', user).then((data) => {
+        console.log("data", data);
+    })
+    }
   }
 
   /** Upon button push, this function should redirect the user to the signup page, at '/signup' */
