@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-
-export default function AlertBox(){
-    return(
-        <div>Hello</div>
-    )
-}
-=======
 import React, { useState, useEffect } from "react";
 
 function AlertBox(props) {
@@ -49,4 +40,3 @@ function AlertBox(props) {
 }
 
 export default AlertBox;
->>>>>>> 42effa1d003761339f8a6fd380c2365223909522
