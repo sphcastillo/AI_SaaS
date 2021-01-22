@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
+// import Button from 'react-bootstrap/Button';
+import { Button, Col, Container, Form } from 'react-bootstrap';
+// import Form from 'react-bootstrap/Form';
+// import Container from 'react-bootstrap/Container';
+// import Col from 'react-bootstrap/Col';
 import AlertBox from './AlertBox';
-
+import axios from 'axios';
 
 export default function Login() {
   /* These are states in React using the useState hook. State persists even through multiple renders.
@@ -21,9 +22,32 @@ export default function Login() {
   const handleSubmit = (event) => {
     // prevent page reload upon form submit:
     event.preventDefault();
+    console.log(username)
+    console.log(password);
+
+    if (username === '' || password === '') {
+      setMessage("USERNAME or Password may not be blank")
+    }
+    else {
+      let user = {
+        username: username,
+        password: password
+      }
+      axios.post('/api/login', user, {headers: {'Set-Cookie': 'NONE'}}).then((data) => {
+        console.log(data)
 
 
+      }).catch((err) => {
+        if (err.message === 'Request failed with status code 401') {
+          setMessage("Incorrect username or password")
+        }
+      })
+
+    }
   }
+
+
+
 
   /** Upon button push, this function should redirect the user to the signup page, at '/signup' */
   const goToSignup = () => {

@@ -5,11 +5,13 @@ const passport = require("../config/passport");
 require("dotenv").config();
 // Routes starting with '/api/'
 
-router.post('/login', passport.authenticate("local"), (req, res) => {
+router.post('/login',  passport.authenticate("local"), (req,  res) => {
   let response = {
     username: req.user.username,
     id: req.user._id,
   }
+  console.log('asdfasdf')
+  console.log(req.headers)
   res.json(response);
 })
 
