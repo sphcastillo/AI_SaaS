@@ -11,6 +11,7 @@ passport.use(
       usernameField: "username"
     },
     (username, password, done) => {
+      console.log("authenicating");
       // When a user tries to sign in this code runs
       db.User.findOne({
           username: username

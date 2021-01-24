@@ -38,6 +38,11 @@ export default function Login() {
     // in React, if we want to communicate with API or database we use AXIOS to do it 
     axios.post('/api/login', user).then((data) => {
         console.log("data", data);
+    }).catch((err) =>  {
+        console.log(err.message);
+        if(err.message === 'Request failed with status code 401'){
+            setMessage("Incorrect username or password");
+        }
     })
     }
   }
