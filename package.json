@@ -1,48 +1,26 @@
 {
-  "name": "newbusiness",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
-    "watch-client": "cd client && npm start",
-    "watch-server": "nodemon --ignore \"client/\" index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm run build",
-    "install": "cd client && npm install",
-    "heroku-postbuild": "npm run build",
-    "sass": "cd client/src/assets && sass.bat index.scss ./css-output/output.css && cd ../../..",
-    "watch-sass": "sass.bat --watch client/src/assets/index.scss client/src/assets/css-output/output.css"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sphcastillo/newbusiness.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sphcastillo/newbusiness/issues"
-  },
-  "homepage": "https://github.com/sphcastillo/newbusiness#readme",
   "dependencies": {
-    "axios": "^0.21.1",
-    "bcrypt": "^5.0.0",
-    "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "if-env": "^1.0.4",
-    "mongoose": "^5.11.10",
-    "morgan": "^1.10.0",
-    "node-sass": "^5.0.0",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.2.5"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0"
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
   }
 }
