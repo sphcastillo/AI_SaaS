@@ -37,7 +37,7 @@ function PdfView({ url }: { url: string }) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       {!file ? (
         <Loader2Icon className="animate-spin h-20 w-20 text-indigo-600 mt-20"/>
       ) : (
