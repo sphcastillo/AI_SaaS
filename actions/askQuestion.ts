@@ -1,5 +1,6 @@
 'use server'
 
+import { Message } from "@/components/Chat";
 import { adminDb } from "@/firebaseAdmin";
 import { generateLangChainCompletion } from "@/lib/langchain";
 import { auth } from "@clerk/nextjs/server";

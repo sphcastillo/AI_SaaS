@@ -11,7 +11,7 @@ import { db } from "@/firebase";
 import { askQuestion } from "@/actions/askQuestion";
 
 export type Message = {
-  id: string;
+  id?: string;
   role: "human" | "ai" | "placeholder";
   message: string;
   createdAt: Date;
