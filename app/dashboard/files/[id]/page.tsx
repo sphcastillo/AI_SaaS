@@ -20,6 +20,8 @@ export default async function ChatToFilePage({
     .doc(id)
     .get();
 
+    const data = ref.data();
+
     const url = ref.data()?.downloadUrl;
 
     return (
