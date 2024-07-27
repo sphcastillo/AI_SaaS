@@ -37,7 +37,7 @@ function Chat({ id }: { id: string }) {
     bottomOfChatRef.current?.scrollIntoView({
         behavior: 'smooth',
     })
-  }, [messages])
+  }, [messages]);
 
   useEffect(() => {
     if (!snapshot) return;
@@ -119,17 +119,18 @@ function Chat({ id }: { id: string }) {
             <Loader2Icon className="animate-spin h-20 w-20 mt-20 text-indigo-600" />
           </div>
         ) : (
-          <div>
+          <div className="p-5">
             {messages.length === 0 && (
                 <ChatMessage
                     key={"placeholder"}
                     message={{
                         role: 'ai',
-                        message: "Ask me anything about the document!..."
+                        message: "Ask me anything about the document!...",
                         createdAt: new Date()
                     }}
                  />
             )}
+
             {messages.map((message, index) => (
                 <ChatMessage key={index} message={message} />
             ))}
