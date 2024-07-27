@@ -1,10 +1,8 @@
 import { initializeApp, getApps, getApp, App, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import * as path from 'path';
 
-const serviceKeyPath = path.resolve(__dirname, '../service_key.json');
-const serviceKey = require(serviceKeyPath);
 
+const serviceKey = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string);
 let app: App;
  
 if(getApps().length === 0){
