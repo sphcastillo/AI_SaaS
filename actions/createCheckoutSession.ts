@@ -2,6 +2,7 @@
 
 import { UserDetails } from "@/app/dashboard/upgrade/page";
 import { adminDb } from "@/firebaseAdmin";
+import getBaseUrl from "@/lib/getBaseUrl";
 import stripe from "@/lib/stripe";
 import { auth } from "@clerk/nextjs/server";
 
@@ -46,6 +47,9 @@ export async function createCheckoutSession(userDetails: UserDetails){
         ],
         mode: 'subscription',
         customer: stripeCustomerId,
-        
+        success_url: `${getBaseUrl()}/dashboard?upgrade=true`,
+        cancel_url: `${getBaseUrl()}/upgrade`,
     });
+
+    return session.id;
 }
