@@ -9,6 +9,7 @@ import { useUser } from "@clerk/nextjs";
 import { collection, orderBy, query } from "firebase/firestore";
 import { db } from "@/firebase";
 import { askQuestion } from "@/actions/askQuestion";
+import { useToast } from "./ui/use-toast";
 
 export type Message = {
   id?: string;
@@ -19,6 +20,7 @@ export type Message = {
 
 function Chat({ id }: { id: string }) {
   const { user } = useUser();
+  const { toast } = useToast();
 
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -94,7 +96,11 @@ function Chat({ id }: { id: string }) {
       const { success, message } = await askQuestion(id, q);
 
       if (!success) {
-        // toast ...
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: message,
+        })
 
         setMessages((prev) =>
           prev.slice(0, prev.length - 1).concat([

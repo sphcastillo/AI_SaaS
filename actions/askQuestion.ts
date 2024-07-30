@@ -5,8 +5,9 @@ import { adminDb } from "@/firebaseAdmin";
 import { generateLangChainCompletion } from "@/lib/langchain";
 import { auth } from "@clerk/nextjs/server";
 // import { generateLangchainCompletion } from "@/lib/langchain"
-const FREE_LIMIT = 3;
-const PRO_LIMIT = 100;
+
+const FREE_LIMIT = 2;
+const PRO_LIMIT = 20;
 
 
 export async function askQuestion(id: string, question: string){
@@ -26,8 +27,32 @@ export async function askQuestion(id: string, question: string){
         (doc) => doc.data().role === "human"
     );
 
-    // tomorrow limit the PRO/FREE users
+    // check membership limits for messages in a document
+    const userRef = await adminDb.collection("users").doc(userId!).get();
 
+    console.log("User ref: ", userRef.data());
+    // limit the PRO/FREE users
+    // check if user is on FREE plan and has asked more than the FREE number of questions
+    if(!userRef.data()?.hasActiveMembership){
+        if(userMessages.length >= FREE_LIMIT){
+            return {
+                success: false,
+                message: `You have reached the limit of ${FREE_LIMIT} questions for the free plan. Upgrade to the PRO plan to ask more questions. 🙂`
+            };
+        }
+    }
+
+    // check if user is on PRO plan and has asked more than 100 questions
+    if(userRef.data()?.hasActiveMembership){
+        if(userMessages.length >= PRO_LIMIT){
+            return {
+                success: false,
+                message: `You have reached the limit of ${PRO_LIMIT} questions per document! 🙂`
+            };
+            
+        }
+    }
+    
     const userMessage: Message = {
         role: 'human',
         message: question,
