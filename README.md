@@ -1,6 +1,4 @@
-README
-
-# 
+# AI SaaS
 
 ## Description
 
@@ -11,7 +9,11 @@ Next.js, Clerk
 
 ## Github Repository
 
+https://github.com/sphcastillo/AI_SaaS
+
 ## Deployed Site
+
+https://smartiedocumentuploader-sphcastillos-projects.vercel.app/
 
 ## More info
 
