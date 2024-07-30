@@ -18,28 +18,34 @@ const features = [
     icon: GlobeIcon,
   },
   {
-    name: "Store your PDF Documents",
+    name: "Blazing Fast Responses",
     description:
-      "Keep all your important PDF files securely stored and easily accessible anytime, anywhere.",
+      "Experience lightning-fast answers to your queries, ensuring you get the information you need instantly.",
     icon: ZapIcon,
   },
   {
-    name: "Store your PDF Documents",
+    name: "Chat Memorisation",
     description:
-      "Keep all your important PDF files securely stored and easily accessible anytime, anywhere.",
+      "Our intelligent chatbot remembers previous interactions, providing a seamless and personalized experience.",
     icon: BrainCogIcon,
   },
   {
-    name: "Store your PDF Documents",
+    name: "Interactive PDF Viewer",
     description:
-      "Keep all your important PDF files securely stored and easily accessible anytime, anywhere.",
-    icon: GlobeIcon,
+      "Engage with your PDFs like never before using our intuitive and interactive viewer.",
+    icon: EyeIcon,
   },
   {
-    name: "Store your PDF Documents",
+    name: "Cloud Backup",
     description:
-      "Keep all your important PDF files securely stored and easily accessible anytime, anywhere.",
-    icon: GlobeIcon,
+      "Rest assured knowing your documents are safely backed up on the cloud, protected from loss or damage.",
+    icon: ServerCogIcon,
+  },
+  {
+    name: "Responsive Across Devices",
+    description:
+      "Access and chat with your PDFs seamlessly on any device, whether it's your desktop, tablet, or smartphone.",
+    icon: MonitorSmartphoneIcon,
   },
 ];
 
