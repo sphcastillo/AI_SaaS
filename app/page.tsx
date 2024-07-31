@@ -69,7 +69,7 @@ export default function Home() {
               Introducing{" "}
               <span className="font-bold text-indigo-600">Chat with PDF.</span>
               <br/>
-              <br/> Upload your document, and our chatbox will answer questions, summarize content, and answer all your Qs. Ideal for everyone, 
+              <br/> Upload your document, and our chatbot will answer questions, summarize content, and answer all your Qs. Ideal for everyone, 
               <span className="text-indigo-600">
               {" "} Chat with PDF
                 </span>{" "}
