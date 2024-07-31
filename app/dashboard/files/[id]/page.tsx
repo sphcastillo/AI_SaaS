@@ -10,6 +10,7 @@ export default async function ChatToFilePage({
         id: string;
     };
 }) {
+
   auth().protect();
   const { userId } = await auth();
 
@@ -21,6 +22,7 @@ export default async function ChatToFilePage({
     .get();
 
     const data = ref.data();
+
 
     const url = ref.data()?.downloadUrl;
 

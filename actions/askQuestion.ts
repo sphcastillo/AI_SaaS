@@ -34,6 +34,8 @@ export async function askQuestion(id: string, question: string){
     // limit the PRO/FREE users
     // check if user is on FREE plan and has asked more than the FREE number of questions
     if(!userRef.data()?.hasActiveMembership){
+        console.log('user Messages length / free limit: ', userMessages.length, FREE_LIMIT);
+
         if(userMessages.length >= FREE_LIMIT){
             return {
                 success: false,
@@ -44,6 +46,7 @@ export async function askQuestion(id: string, question: string){
 
     // check if user is on PRO plan and has asked more than 100 questions
     if(userRef.data()?.hasActiveMembership){
+        console.log("user messages length / pro limit: ", userMessages.length, PRO_LIMIT);
         if(userMessages.length >= PRO_LIMIT){
             return {
                 success: false,

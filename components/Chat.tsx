@@ -2,7 +2,7 @@
 import { FormEvent, useEffect, useRef, useState, useTransition } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Loader, Loader2Icon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import ChatMessage from "./ChatMessage";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useUser } from "@clerk/nextjs";
@@ -44,7 +44,7 @@ function Chat({ id }: { id: string }) {
   useEffect(() => {
     if (!snapshot) return;
 
-    console.log("Updated snapshot: ", snapshot.docs);
+    console.log("Chat component ~ Updated snapshot: ", snapshot.docs);
 
     // get second last message to check if the AI is thinking ...
     const lastMessage = messages.pop();
@@ -75,6 +75,7 @@ function Chat({ id }: { id: string }) {
 
     // copy my input into a variable
     const q = input;
+
     setInput("");
 
     // Optimistic UI update
@@ -94,6 +95,8 @@ function Chat({ id }: { id: string }) {
 
     startTransition(async () => {
       const { success, message } = await askQuestion(id, q);
+
+      console.log("SUCCESS / MESSAGE: ", success, message);
 
       if (!success) {
         toast({
