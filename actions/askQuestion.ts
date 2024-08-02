@@ -9,7 +9,6 @@ import { auth } from "@clerk/nextjs/server";
 const FREE_LIMIT = 2;
 const PRO_LIMIT = 20;
 
-
 export async function askQuestion(id: string, question: string){
     auth().protect();
     const { userId } = await auth();

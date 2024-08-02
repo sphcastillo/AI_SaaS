@@ -21,17 +21,17 @@ export default async function ChatToFilePage({
     .doc(id)
     .get();
 
-    const data = ref.data();
-
-
     const url = ref.data()?.downloadUrl;
+
 
     return (
       <div className="grid lg:grid-cols-5 h-full overflow-hidden">
         {/* Right */}
         <div className="col-span-5 lg:col-span-2 overflow-y-auto">
           {/* Chat */}
-          <Chat id={id}/>
+          <Chat 
+            id={id} 
+          />
         </div>
 
         {/* Left */}
