@@ -25,9 +25,12 @@ function Chat({ id }: { id: string }) {
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [countdown, setCountdown] = useState(0);
   const bottomOfChatRef = useRef<HTMLDivElement>(null);
 
-  const [snapshot, loading, error] = useCollection(
+  const [snapshot] = useCollection(
     user &&
       query(
         collection(db, "users", user?.id, "files", id, "chat"),
@@ -36,10 +39,40 @@ function Chat({ id }: { id: string }) {
   );
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); // Set loading to false after 10 seconds
+    }, 10000); // 10 seconds delay
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     bottomOfChatRef.current?.scrollIntoView({
-        behavior: 'smooth',
-    })
+      behavior: "smooth",
+    });
   }, [messages]);
+
+  useEffect(() => {
+    if (countdown === 0) return;
+
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setIsFormDisabled(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [countdown]);
+
+  const startCountdown = () => {
+    setIsFormDisabled(true);
+    setCountdown(20);
+  };
 
   useEffect(() => {
     if (!snapshot) return;
@@ -103,7 +136,7 @@ function Chat({ id }: { id: string }) {
           variant: "destructive",
           title: "Error",
           description: message,
-        })
+        });
 
         setMessages((prev) =>
           prev.slice(0, prev.length - 1).concat([
@@ -116,6 +149,8 @@ function Chat({ id }: { id: string }) {
         );
       }
     });
+
+    startCountdown();
   };
 
   return (
@@ -130,20 +165,20 @@ function Chat({ id }: { id: string }) {
         ) : (
           <div className="p-5">
             {messages.length === 0 && (
-                <ChatMessage
-                    key={"placeholder"}
-                    message={{
-                        role: 'ai',
-                        message: "Ask me anything about the document!...",
-                        createdAt: new Date()
-                    }}
-                 />
+              <ChatMessage
+                key={"placeholder"}
+                message={{
+                  role: "ai",
+                  message: "Ask me anything about the document!...",
+                  createdAt: new Date(),
+                }}
+              />
             )}
 
             {messages.map((message, index) => (
-                <ChatMessage key={index} message={message} />
+              <ChatMessage key={index} message={message} />
             ))}
-            <div ref={bottomOfChatRef}/>
+            <div ref={bottomOfChatRef} />
           </div>
         )}
       </div>
@@ -157,9 +192,15 @@ function Chat({ id }: { id: string }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button type="submit" disabled={!input || isPending}>
+        <Button 
+          type="submit" 
+          disabled={!input || isPending || isFormDisabled}
+          className={isFormDisabled ? "bg-red-600" : ""}
+        >
           {isPending ? (
             <Loader2Icon className="animate-spin text-indigo-600" />
+          ) : isFormDisabled ? (
+            `Chatbox is ready to respond in ${countdown} sec`
           ) : (
             "Ask"
           )}
