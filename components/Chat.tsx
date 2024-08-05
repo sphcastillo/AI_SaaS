@@ -25,12 +25,9 @@ function Chat({ id }: { id: string }) {
   const [input, setInput] = useState("");
   const [isPending, startTransition] = useTransition();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isFormDisabled, setIsFormDisabled] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [countdown, setCountdown] = useState(0);
   const bottomOfChatRef = useRef<HTMLDivElement>(null);
 
-  const [snapshot] = useCollection(
+  const [snapshot, loading, error] = useCollection(
     user &&
       query(
         collection(db, "users", user?.id, "files", id, "chat"),
@@ -38,13 +35,6 @@ function Chat({ id }: { id: string }) {
       )
   );
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false); // Set loading to false after 10 seconds
-    }, 10000); // 10 seconds delay
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     bottomOfChatRef.current?.scrollIntoView({
@@ -52,27 +42,6 @@ function Chat({ id }: { id: string }) {
     });
   }, [messages]);
 
-  useEffect(() => {
-    if (countdown === 0) return;
-
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setIsFormDisabled(false);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [countdown]);
-
-  const startCountdown = () => {
-    setIsFormDisabled(true);
-    setCountdown(20);
-  };
 
   useEffect(() => {
     if (!snapshot) return;
@@ -149,8 +118,6 @@ function Chat({ id }: { id: string }) {
         );
       }
     });
-
-    startCountdown();
   };
 
   return (
@@ -194,14 +161,11 @@ function Chat({ id }: { id: string }) {
         />
         <Button 
           type="submit" 
-          disabled={!input || isPending || isFormDisabled}
-          className={isFormDisabled ? "bg-red-600" : ""}
+          disabled={!input || isPending}
         >
           {isPending ? (
             <Loader2Icon className="animate-spin text-indigo-600" />
-          ) : isFormDisabled ? (
-            `Chatbox is ready to respond in ${countdown} sec`
-          ) : (
+          ) :  (
             "Ask"
           )}
         </Button>
