@@ -28,7 +28,7 @@ function useUpload() {
     const handleUpload = async (file: File) => {
         if(!file || !user) return;
 
-        // TODO: FREE/PRO limitations...
+        // FREE/PRO limitations...
 
         const fileIdToUploadTo = uuidv4();
         // find somewhere to store user's file

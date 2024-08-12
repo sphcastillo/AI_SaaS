@@ -6,7 +6,9 @@ const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
     if(isProtectedRoute(req)) auth().protect();
-});
+}, 
+// { debug: true }
+);
 
 
 // Everything is actually public and you need to specify what you want to protected
