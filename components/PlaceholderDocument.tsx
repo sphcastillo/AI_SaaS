@@ -29,7 +29,7 @@ function PlaceholderDocument() {
           <PlusCircleIcon className="h-16 w-16" />
         )}
   
-        <p className="font-semibold">
+        <p className="pt-2 font-semibold">
           {isOverFileLimit ? "Upgrade to add more documents" : "Add a document"}
         </p>
       </Button>
