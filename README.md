@@ -1,11 +1,12 @@
 # AI SaaS
 
 ## Description
+Uploader of PDFs
 
 ## Requirements
 
 ## Technologies & Methods Used
-Next.js, Clerk
+Next.js, Clerk, Firestore database
 
 ## Github Repository
 
@@ -13,7 +14,7 @@ https://github.com/sphcastillo/AI_SaaS
 
 ## Deployed Site
 
-https://smartiedocumentuploader-sphcastillos-projects.vercel.app/
+
 
 ## More info
 
