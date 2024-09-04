@@ -4,9 +4,10 @@
 Uploader of PDFs
 
 ## Requirements
+Clerk authentication account. Stripe Account. Google Firebase Account. 
 
 ## Technologies & Methods Used
-Next.js, Clerk, Firestore database
+Next.js, Clerk, Firestore database, Langchain, Pinecone, Stripe
 
 ## Github Repository
 
